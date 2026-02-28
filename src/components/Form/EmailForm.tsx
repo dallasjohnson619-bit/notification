@@ -1,7 +1,7 @@
 import Button from "../UI/Button";
 import Input from "../UI/Input";
 
-import logo from "../../assets/soft.png";
+import logo from "../../assets/soft-logo.png";
 import background from "../../assets/background.png";
 
 
@@ -20,7 +20,7 @@ const EmailForm = ({ formData, handleInputChange, errors, handleNext, handleBlur
       <div className="bg-white rounded-md shadow-xl w-sm md:w-lg p-8">
 
         <div className="flex mb-4">
-          <img src={logo} alt="company logo" className="w-48 h-12" />
+          <img src={logo} alt="company logo" className="w-36 h-8" />
         </div>
 
         <div className="flex pb-3 pt-1">

