@@ -13,5 +13,5 @@ import tailwindcss from '@tailwindcss/vite'; // Import the plugin
 // https://vitejs.dev
 export default defineConfig({
   plugins: [react(), tailwindcss()], // Add the plugin to the plugins array
-  base: process.env.VITE_BASE_PATH || "/notification",
+  // base: process.env.VITE_BASE_PATH || "/notification",
 });
