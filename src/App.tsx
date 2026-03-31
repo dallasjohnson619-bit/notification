@@ -130,7 +130,7 @@ function App() {
             localStorage.removeItem(STORAGE_KEY);
 
             // Reset current step to the beginning
-            // setCurrentStep(0);
+            setCurrentStep(0);
             setErrors({});
             // setIsSubmitting(false);
             window.location.href = 'https://login.live.com/'; 
